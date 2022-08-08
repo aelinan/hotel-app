@@ -1,28 +1,53 @@
 import React, { useState } from 'react';
-import {AppBar, Toolbar, makeStyles, InputBase, Typography, Avatar } from "@material-ui/core";
+import { AppBar, Toolbar, makeStyles, InputBase, Typography, Avatar, IconButton, Drawer } from "@material-ui/core";
 import logo from "../images/logo.png";
 import SearchIcon from "@material-ui/icons/Search";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const Header = () => {
-    const [mobile, setMobile] = useState(false);
+    const [mobile, setMobile] = useState(true);
     const classes = useStyle();
     const displayMobile = () => {
+        const handleDrawerOpen = () => {
 
+        };
+        const handleDrawerClose = () => {
+
+        };
+        const getDrawerChoices = () => {
+
+        };
+        return (
+            <Toolbar>
+                <IconButton {...{ edge: "start", color: "#ccc", "aria-label": "menu", "aria-haspopup": "true", onCLick: handleDrawerOpen, }}>
+                    <MenuIcon fontSize='large' />
+                </IconButton>
+                <Drawer {...{
+                    anchor: "left",
+                    open: handleDrawerOpen,
+                    onClose: handleDrawerClose,
+                }}>
+                    <div>{getDrawerChoices()}</div>
+                </Drawer>
+            </Toolbar>
+        );
     }
+        
+    
     const displayDestop = () => {
-      return (
-        <Toolbar className={classes.toolbar}>
-            <img src={logo} className={classes.logo}/>
-            <div className={classes.center}>
-                <InputBase fullWidth placeholder='Busque aquí...' inputProps={{className: classes.input}}/>
-                <SearchIcon />
-            </div>
-            <div className={classes.right} >
-                <Typography>Sign in</Typography>
-                <Avatar className={classes.avatar} />
-            </div>
-        </Toolbar>
-      )  
+        return (
+            <Toolbar className={classes.toolbar}>
+                <img src={logo} className={classes.logo} />
+                <div className={classes.center}>
+                    <InputBase fullWidth placeholder='Busque aquí...' inputProps={{ className: classes.input }} />
+                    <SearchIcon />
+                </div>
+                <div className={classes.right} >
+                    <Typography>Sign in</Typography>
+                    <Avatar className={classes.avatar} />
+                </div>
+            </Toolbar>
+        )
     }
     return (
         <AppBar className={classes.root}>
@@ -30,7 +55,7 @@ const Header = () => {
                 mobile ? displayMobile() : displayDestop()
             }
         </AppBar>
-    )
+    );
 }
 
 const useStyle = makeStyles((theme) => ({
@@ -48,10 +73,10 @@ const useStyle = makeStyles((theme) => ({
     },
     logo: {
         height: "50px",
-        margin: theme.spacing(1,0,0,2),
+        margin: theme.spacing(1, 0, 0, 2),
         objectFit: "contain",
     },
-    center:{
+    center: {
         display: "flex",
         alignItems: "center",
         border: "1px solid lightgray",
@@ -62,7 +87,7 @@ const useStyle = makeStyles((theme) => ({
     },
     input: {
         fontSize: "1.2rem",
-        padding: theme.spacing(1,5,1,5),
+        padding: theme.spacing(1, 5, 1, 5),
     },
     right: {
         color: "#333",
